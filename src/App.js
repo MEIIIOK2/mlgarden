@@ -12,7 +12,7 @@ const App=()=> {
     
     <div className="App">
       <header className="App-header">
-        {isAuthenticated()?'HELLO fuckers':'shit wrong'}
+        {isAuthenticated()?'HELLO dear user':'not authgorized'}
         <Link to="/register">Register</Link>
       </header>
     </div>
