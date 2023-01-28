@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -7,6 +8,11 @@ import { AuthProvider } from 'react-auth-kit';
 import Register from './Register/Register';
 import { BrowserRouter } from "react-router-dom";
 import Login from './Login/Login';
+import Processing from './Processing/Processing';
+import { RequireAuth } from 'react-auth-kit';
+import axios from 'axios';
+import Dashboard from './Dashboard/Dashboard';
+
 import {
   Routes,
   Route,
@@ -16,6 +22,7 @@ import {
   Navigate,
   Outlet,
 } from "react-router-dom";
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +36,18 @@ root.render(
           <Route path="/" element={<App/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/login" element={<Login/>} />
+          
+          <Route path={'/dashboard'} element={
+            <RequireAuth loginPath={'/login'}>
+              <Dashboard/>
+            </RequireAuth>
+          }/>
+          <Route path={'datasets/:name'} element={
+            <RequireAuth loginPath={'/login'}>
+              <Processing/>
+            </RequireAuth>
+          }/>
+            
           
         {/* </Route> */}
 

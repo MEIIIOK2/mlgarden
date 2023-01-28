@@ -3,21 +3,25 @@ import './App.css';
 import {useIsAuthenticated} from 'react-auth-kit';
 import Login from './Login/Login';
 import {Link} from "react-router-dom";
+import {Navigate} from 'react-router-dom'
 
 
 const App=()=> {
   const isAuthenticated = useIsAuthenticated()
   console.log(isAuthenticated());
-  return (
+  if (isAuthenticated()){
+    return (
     
-    <div className="App">
-      <header className="App-header">
-        {isAuthenticated()?'HELLO dear user':'not authgorized'}
-        <Link to="/register">Register</Link>
-      </header>
-    </div>
-   
-  );
+      <Navigate to = '/dashboard'/>
+     
+    );
+  }
+  else{
+    return(
+      <Navigate to='/login'/>
+    )
+  }
+  
 }
 
 export default App;
